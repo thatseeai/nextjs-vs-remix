@@ -1,0 +1,92 @@
+{
+  "measurementDate": "2025-11-18",
+  "environment": {
+    "platform": "Linux 4.4.0",
+    "nodeVersion": "20.x",
+    "conditions": "Production build on same hardware, sequential execution"
+  },
+  "nextjs": {
+    "version": "16.0.3",
+    "buildTool": "Turbopack",
+    "buildTime": "18.624s",
+    "buildTimeMs": 18624,
+    "bundleSize": "9.5MB",
+    "bundleSizeBytes": 9961472,
+    "staticAssets": "677KB",
+    "staticAssetsBytes": 693248,
+    "nodeModulesSize": "708MB",
+    "nodeModulesSizeBytes": 742391808,
+    "testTime": "N/A",
+    "notes": [
+      "Using Turbopack (Next.js 16 default)",
+      "Includes TypeScript compilation",
+      "Static generation for 16 pages"
+    ]
+  },
+  "remix": {
+    "version": "2.17.2",
+    "buildTool": "Vite 6.4.1",
+    "buildTime": "7.640s",
+    "buildTimeMs": 7640,
+    "bundleSize": "487KB",
+    "bundleSizeBytes": 498688,
+    "clientBundleSize": "353KB",
+    "clientBundleSizeBytes": 361472,
+    "serverBundleSize": "130KB",
+    "serverBundleSizeBytes": 133120,
+    "nodeModulesSize": "239MB",
+    "nodeModulesSizeBytes": 250609664,
+    "testTime": "N/A",
+    "notes": [
+      "Using Vite for both dev and production",
+      "Significantly faster build than Next.js",
+      "Much smaller bundle size"
+    ]
+  },
+  "reactRouter7": {
+    "version": "7.1.1",
+    "buildTool": "Vite 6.4.1",
+    "buildTime": "6.975s",
+    "buildTimeMs": 6975,
+    "bundleSize": "496KB",
+    "bundleSizeBytes": 507904,
+    "clientBundleSize": "357KB",
+    "clientBundleSizeBytes": 365568,
+    "serverBundleSize": "135KB",
+    "serverBundleSizeBytes": 138240,
+    "nodeModulesSize": "175MB",
+    "nodeModulesSizeBytes": 183500800,
+    "testTime": "N/A",
+    "notes": [
+      "Fastest build time among all three",
+      "Smallest node_modules size",
+      "Similar bundle size to Remix"
+    ]
+  },
+  "comparison": {
+    "buildTime": {
+      "fastest": "React Router 7",
+      "nextJsVsRemix": "2.44x slower",
+      "nextJsVsReactRouter7": "2.67x slower",
+      "remixVsReactRouter7": "1.10x slower"
+    },
+    "bundleSize": {
+      "smallest": "Remix",
+      "nextJsVsRemix": "19.49x larger",
+      "nextJsVsReactRouter7": "19.10x larger",
+      "remixVsReactRouter7": "0.98x (almost same)"
+    },
+    "nodeModules": {
+      "smallest": "React Router 7",
+      "nextJsVsRemix": "2.96x larger",
+      "nextJsVsReactRouter7": "4.05x larger",
+      "remixVsReactRouter7": "1.37x larger"
+    },
+    "winner": {
+      "buildSpeed": "React Router 7 (6.975s)",
+      "bundleSize": "Remix (487KB)",
+      "diskSpace": "React Router 7 (175MB)",
+      "overall": "React Router 7"
+    }
+  }
+}

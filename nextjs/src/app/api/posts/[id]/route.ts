@@ -124,7 +124,6 @@ export async function PUT(
       ...posts[postIndex],
       title,
       body: content,
-      updatedAt: new Date().toISOString(),
     };
 
     return NextResponse.json(
