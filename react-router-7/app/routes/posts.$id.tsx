@@ -3,7 +3,6 @@ import type {
   LoaderFunctionArgs,
   ActionFunctionArgs,
 } from "react-router";
-import { json, redirect } from "react-router";
 import { useLoaderData, Link, useFetcher } from "react-router";
 import { useState } from "react";
 import { Card } from "~/components/ui/Card";
@@ -193,7 +192,7 @@ React Router 7와 Vite의 조합은 최고의 개발 경험과 성능을 제공�
     });
   }
 
-  return json({ post });
+  return { post };
 }
 
 /**
@@ -221,10 +220,10 @@ export async function action({ request, params }: ActionFunctionArgs) {
     console.log(`게시글 ${params.id}에 좋아요 추가`);
 
     // 성공 응답 반환
-    return json({ success: true, message: "좋아요를 추가했습니다." });
+    return { success: true, message: "좋아요를 추가했습니다." };
   }
 
-  return json({ success: false, message: "알 수 없는 액션입니다." });
+  return { success: false, message: "알 수 없는 액션입니다." };
 }
 
 export default function PostDetail() {

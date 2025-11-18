@@ -1,5 +1,4 @@
 import type { MetaFunction, ActionFunctionArgs } from "react-router";
-import { json } from "@react-router/node";
 import { Form, useActionData } from "react-router";
 import { Card } from "~/components/ui/Card";
 import { Input } from "~/components/ui/Input";
@@ -38,7 +37,7 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   if (Object.keys(errors).length > 0) {
-    return json({ errors, success: false }, { status: 400 });
+    throw Response.json({ errors, success: false }, { status: 400 });
   }
 
   /**
@@ -47,7 +46,7 @@ export async function action({ request }: ActionFunctionArgs) {
    */
   console.log("프로필 업데이트:", { name, email });
 
-  return json({ success: true, message: "프로필이 업데이트되었습니다." });
+  return { success: true, message: "프로필이 업데이트되었습니다." };
 }
 
 export default function DashboardProfile() {
