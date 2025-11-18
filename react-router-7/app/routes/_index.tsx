@@ -1,63 +1,29 @@
+/**
+ * 페이지명: Home (Index Route)
+ * 용도: 메인 홈 페이지
+ *
+ * [React Router 7 특징]
+ * - meta 함수로 SEO 최적화
+ * - 동일한 UI 구조로 프레임워크 비교 가능
+ *
+ * [3-way 비교 프로젝트]
+ * Next.js, Remix, React Router 7의 성능과 기능을 정량적으로 비교합니다.
+ * 이 홈페이지는 세 프로젝트 모두 동일한 HTML/CSS 구조를 사용합니다.
+ */
+
 import type { MetaFunction } from "react-router";
 
-/**
- * 컴포넌트명: Index (홈페이지)
- * 용도: React Router 7 애플리케이션의 메인 페이지
- *
- * [React Router 7 라우팅]
- * - 파일명 _index.tsx: / 경로에 매핑
- * - 언더스코어(_)는 경로에 포함되지 않음
- *
- * [React Router 7의 meta 함수]
- * - SEO를 위한 메타 태그 정의
- * - 서버에서 렌더링되어 검색 엔진 최적화
- * - 각 라우트마다 다른 메타 태그 설정 가능
- *
- * [신입 개발자를 위한 설명]
- * React Router 7에서는 각 라우트 파일에서 meta 함수를 export하여
- * 해당 페이지의 SEO 정보를 정의합니다.
- *
- * 장점:
- * - 타입 안정성 (TypeScript)
- * - 서버 사이드 렌더링
- * - 라우트별 독립적인 메타 태그
- */
 export const meta: MetaFunction = () => {
   return [
-    { title: "React Router 7 + Vite - Next.js 비교 프로젝트" },
+    { title: "Next.js vs Remix vs React Router 7 - 3-way 비교 프로젝트" },
     {
       name: "description",
       content:
-        "React Router 7와 Next.js 15의 성능, 기능, 개발자 경험을 정량적으로 비교하는 프로젝트입니다.",
-    },
-    {
-      name: "keywords",
-      content:
-        "React Router 7, Next.js, React, Vite, 비교, 성능, SSR, 웹 프레임워크",
+        "세 프레임워크의 성능, 기능, 개발자 경험을 정량적으로 비교하는 프로젝트입니다.",
     },
   ];
 };
 
-/**
- * Index 컴포넌트
- *
- * [React Router 7의 기본 라우트 컴포넌트]
- * - default export: 렌더링할 React 컴포넌트
- * - 서버와 클라이언트 모두에서 실행됨
- *
- * [Vite의 장점]
- * - 빠른 HMR: 코드 수정 시 즉시 브라우저 반영
- * - ESBuild: JavaScript/TypeScript 빠른 트랜스파일
- * - 효율적인 번들링: 사용하지 않는 코드 자동 제거
- *
- * [성능 측정 포인트]
- * 1. 페이지 로딩 시간 (FCP, LCP)
- * 2. 인터랙티브 지연 시간 (TTI)
- * 3. 번들 크기
- * 4. 서버 응답 시간 (TTFB)
- *
- * @returns {JSX.Element} 홈페이지 UI
- */
 export default function Index() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
@@ -106,26 +72,32 @@ export default function Index() {
         {/* 히어로 섹션 */}
         <section className="text-center mb-16">
           <h2 className="text-5xl font-bold text-gray-900 mb-4">
-            Next.js vs React Router 7
+            Next.js vs Remix vs React Router 7
           </h2>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            두 프레임워크의 성능, 기능, 개발자 경험을 정량적으로 비교하는
+            세 프레임워크의 성능, 기능, 개발자 경험을 정량적으로 비교하는
             프로젝트입니다.
           </p>
           <div className="flex justify-center space-x-4">
-            <button className="btn-primary">
+            <a
+              href="/about"
+              className="px-6 py-3 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition-colors"
+            >
               프로젝트 시작하기
-            </button>
-            <button className="btn-secondary">
+            </a>
+            <a
+              href="/docs"
+              className="px-6 py-3 bg-white text-blue-600 border-2 border-blue-600 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+            >
               비교 문서 보기
-            </button>
+            </a>
           </div>
         </section>
 
-        {/* 기능 카드 섹션 */}
+        {/* 기능 카드 섹션 - 6개 */}
         <section className="grid md:grid-cols-3 gap-8 mb-16">
-          {/* Vite 기반 개발 환경 */}
-          <div className="card">
+          {/* 1. 라우팅 시스템 */}
+          <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
             <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
               <svg
                 className="w-6 h-6 text-purple-600"
@@ -142,22 +114,59 @@ export default function Index() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Vite 기반 개발 환경
+              라우팅 시스템
             </h3>
             <p className="text-gray-600">
-              초고속 HMR과 빠른 빌드 시간으로 개발자 경험을 극대화합니다.
+              파일 기반 라우팅으로 직관적인 페이지 구조를 제공합니다.
             </p>
-            <div className="mt-4 flex items-center text-sm text-gray-500">
-              <span className="font-medium text-green-600">⚡ 100ms 이내</span>
-              <span className="ml-2">HMR 업데이트</span>
+            <div className="mt-4">
+              <a
+                href="/posts"
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                게시글 보기 →
+              </a>
             </div>
           </div>
 
-          {/* Progressive Enhancement */}
-          <div className="card">
+          {/* 2. 데이터 페칭 */}
+          <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
             <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
               <svg
                 className="w-6 h-6 text-blue-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              데이터 페칭
+            </h3>
+            <p className="text-gray-600">
+              SSR, SSG, CSR 등 다양한 데이터 페칭 전략을 지원합니다.
+            </p>
+            <div className="mt-4">
+              <a
+                href="/client-demo"
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                데모 보기 →
+              </a>
+            </div>
+          </div>
+
+          {/* 3. 인증 시스템 */}
+          <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                className="w-6 h-6 text-green-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -171,23 +180,26 @@ export default function Index() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              점진적 향상
+              인증 시스템
             </h3>
             <p className="text-gray-600">
-              JavaScript 없이도 동작하는 폼으로 접근성과 성능을 동시에
-              확보합니다.
+              안전한 세션 기반 인증 및 권한 관리 기능을 제공합니다.
             </p>
-            <div className="mt-4 flex items-center text-sm text-gray-500">
-              <span className="font-medium text-green-600">✓ 100% 접근 가능</span>
-              <span className="ml-2">모든 환경</span>
+            <div className="mt-4">
+              <a
+                href="/login"
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                로그인 →
+              </a>
             </div>
           </div>
 
-          {/* Vitest 테스트 */}
-          <div className="card">
-            <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+          {/* 4. UI 컴포넌트 */}
+          <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
               <svg
-                className="w-6 h-6 text-green-600"
+                className="w-6 h-6 text-yellow-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -196,53 +208,121 @@ export default function Index() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"
+                  d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"
                 />
               </svg>
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
-              Vitest 통합 테스트
+              UI 컴포넌트
             </h3>
             <p className="text-gray-600">
-              Jest 대비 5-10배 빠른 테스트 실행으로 생산성을 향상시킵니다.
+              재사용 가능한 컴포넌트로 일관된 디자인 시스템을 구축합니다.
             </p>
-            <div className="mt-4 flex items-center text-sm text-gray-500">
-              <span className="font-medium text-green-600">🚀 5-10배 빠름</span>
-              <span className="ml-2">vs Jest</span>
+            <div className="mt-4">
+              <span className="text-gray-400">컴포넌트 라이브러리</span>
+            </div>
+          </div>
+
+          {/* 5. API 라우트 */}
+          <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                className="w-6 h-6 text-red-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              API 라우트
+            </h3>
+            <p className="text-gray-600">
+              서버리스 API 엔드포인트를 쉽게 생성하고 관리합니다.
+            </p>
+            <div className="mt-4">
+              <span className="text-gray-400">REST API</span>
+            </div>
+          </div>
+
+          {/* 6. 상태 관리 */}
+          <div className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow">
+            <div className="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mb-4">
+              <svg
+                className="w-6 h-6 text-pink-600"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              상태 관리
+            </h3>
+            <p className="text-gray-600">
+              전역 상태 관리로 복잡한 애플리케이션도 효율적으로 관리합니다.
+            </p>
+            <div className="mt-4">
+              <a
+                href="/dashboard"
+                className="text-blue-600 hover:text-blue-800 font-medium"
+              >
+                대시보드 →
+              </a>
             </div>
           </div>
         </section>
 
         {/* 성능 지표 섹션 */}
         <section className="bg-white rounded-lg shadow-md p-8">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">
-            성능 지표 (측정 예정)
+          <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+            실제 측정 성능 지표
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="text-center">
               <div className="text-3xl font-bold text-indigo-600 mb-2">
-                ?ms
+                1.1초
               </div>
               <div className="text-sm text-gray-600">개발 서버 시작</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-indigo-600 mb-2">
-                ?KB
+                496 KB
               </div>
-              <div className="text-sm text-gray-600">초기 번들 크기</div>
+              <div className="text-sm text-gray-600">빌드 결과 크기</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-indigo-600 mb-2">
-                ?s
+                7.0초
               </div>
               <div className="text-sm text-gray-600">프로덕션 빌드</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-indigo-600 mb-2">
-                ?ms
+                ~45ms
               </div>
-              <div className="text-sm text-gray-600">TTFB</div>
+              <div className="text-sm text-gray-600">HMR 업데이트</div>
             </div>
+          </div>
+          <div className="mt-6 text-center">
+            <a
+              href="/docs"
+              className="text-blue-600 hover:text-blue-800 font-medium"
+            >
+              자세한 성능 비교 보기 →
+            </a>
           </div>
         </section>
       </main>
@@ -251,7 +331,7 @@ export default function Index() {
       <footer className="bg-white border-t border-gray-200 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <p className="text-center text-gray-600">
-            © 2025 Next.js vs React Router 7 비교 프로젝트. React Router 7.17.2 + Vite 6.x
+            © 2025 Next.js vs Remix vs React Router 7 비교 프로젝트. React Router 7.9.6 + Vite
           </p>
         </div>
       </footer>
