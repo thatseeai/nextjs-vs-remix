@@ -64,11 +64,12 @@ export function Header() {
               <Link href="/blog" className={getLinkStyle('/blog')}>
                 블로그
               </Link>
-              {user && (
-                <Link href="/dashboard" className={getLinkStyle('/dashboard')}>
-                  대시보드
-                </Link>
-              )}
+              <Link href="/docs" className={getLinkStyle('/docs')}>
+                문서
+              </Link>
+              <Link href="/dashboard" className={getLinkStyle('/dashboard')}>
+                대시보드
+              </Link>
               <Link href="/client-demo" className={getLinkStyle('/client-demo')}>
                 클라이언트 데모
               </Link>

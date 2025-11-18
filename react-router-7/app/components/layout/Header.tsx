@@ -41,6 +41,7 @@ const navItems: NavItem[] = [
   { name: "소개", path: "/about" },
   { name: "게시글", path: "/posts" },
   { name: "블로그", path: "/blog" },
+  { name: "문서", path: "/docs" },
   { name: "대시보드", path: "/dashboard" },
   { name: "클라이언트 데모", path: "/client-demo" },
 ];
