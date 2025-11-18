@@ -1,5 +1,4 @@
 import type { MetaFunction, LoaderFunctionArgs } from "react-router";
-import { json } from "@react-router/node";
 import { useLoaderData } from "react-router";
 import { Card } from "~/components/ui/Card";
 import { formatDate, timeAgo } from "~/lib/utils";
@@ -74,15 +73,17 @@ export async function loader({ request }: LoaderFunctionArgs) {
    * - public: CDN에서 캐시 가능
    * - max-age=300: 5분간 캐시
    * - s-maxage=600: CDN에서 10분간 캐시
+   *
+   * Note: headers가 필요한 경우 Response.json() 사용
    */
-  return json(
+  return Response.json(
     { blogPosts },
     {
       headers: {
         "Cache-Control": "public, max-age=300, s-maxage=600",
       },
     }
-  );
+  ) as Response & { blogPosts: typeof blogPosts };
 }
 
 export default function Blog() {

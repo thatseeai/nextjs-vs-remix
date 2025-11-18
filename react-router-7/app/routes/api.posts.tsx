@@ -1,5 +1,4 @@
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "react-router";
-import { json } from "@react-router/node";
 import { HTTP_STATUS } from "~/lib/constants";
 
 /**
@@ -52,7 +51,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     },
   ];
 
-  return json({
+  return {
     posts: mockPosts,
     pagination: {
       page,
@@ -60,7 +59,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       total: mockPosts.length,
       totalPages: Math.ceil(mockPosts.length / limit),
     },
-  });
+  };
 }
 
 /**
@@ -69,7 +68,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
  */
 export async function action({ request }: ActionFunctionArgs) {
   if (request.method !== "POST") {
-    return json(
+    return Response.json(
       { error: "Method not allowed" },
       { status: 405 }
     );
@@ -83,14 +82,14 @@ export async function action({ request }: ActionFunctionArgs) {
    * [유효성 검사]
    */
   if (!title || typeof title !== "string") {
-    return json(
+    return Response.json(
       { error: "제목은 필수입니다." },
       { status: HTTP_STATUS.BAD_REQUEST }
     );
   }
 
   if (!content || typeof content !== "string") {
-    return json(
+    return Response.json(
       { error: "내용은 필수입니다." },
       { status: HTTP_STATUS.BAD_REQUEST }
     );
@@ -108,7 +107,7 @@ export async function action({ request }: ActionFunctionArgs) {
     createdAt: new Date().toISOString(),
   };
 
-  return json(
+  return Response.json(
     { post: newPost, message: "게시글이 생성되었습니다." },
     { status: HTTP_STATUS.CREATED }
   );

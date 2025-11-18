@@ -1,5 +1,4 @@
 import type { LoaderFunctionArgs, ActionFunctionArgs } from "react-router";
-import { json } from "@react-router/node";
 import { HTTP_STATUS } from "~/lib/constants";
 
 /**
@@ -20,7 +19,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
   const { id } = params;
 
   if (!id) {
-    return json(
+    return Response.json(
       { error: "게시글 ID가 필요합니다." },
       { status: HTTP_STATUS.BAD_REQUEST }
     );
@@ -38,7 +37,7 @@ export async function loader({ params }: LoaderFunctionArgs) {
     createdAt: new Date().toISOString(),
   };
 
-  return json({ post: mockPost });
+  return { post: mockPost };
 }
 
 /**
@@ -48,7 +47,7 @@ export async function action({ request, params }: ActionFunctionArgs) {
   const { id } = params;
 
   if (!id) {
-    return json(
+    return Response.json(
       { error: "게시글 ID가 필요합니다." },
       { status: HTTP_STATUS.BAD_REQUEST }
     );
@@ -73,10 +72,10 @@ export async function action({ request, params }: ActionFunctionArgs) {
       updatedAt: new Date().toISOString(),
     };
 
-    return json({
+    return {
       post: updatedPost,
       message: "게시글이 수정되었습니다.",
-    });
+    };
   }
 
   /**
@@ -87,12 +86,12 @@ export async function action({ request, params }: ActionFunctionArgs) {
      * [실제 프로젝트]
      * await db.posts.delete({ where: { id } })
      */
-    return json({
+    return {
       message: "게시글이 삭제되었습니다.",
-    });
+    };
   }
 
-  return json(
+  return Response.json(
     { error: "Method not allowed" },
     { status: 405 }
   );

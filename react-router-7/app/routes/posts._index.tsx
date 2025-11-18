@@ -1,5 +1,4 @@
 import type { MetaFunction, LoaderFunctionArgs } from "react-router";
-import { json } from "@react-router/node";
 import { Link, useLoaderData } from "react-router";
 import { Card } from "~/components/ui/Card";
 import { Button } from "~/components/ui/Button";
@@ -139,10 +138,10 @@ export async function loader({ request }: LoaderFunctionArgs) {
 
   /**
    * [데이터 반환]
-   * json() 헬퍼 함수로 데이터를 JSON 응답으로 반환합니다.
+   * React Router 7에서는 객체를 직접 반환할 수 있습니다.
    * 타입 안정성을 위해 타입을 명시합니다.
    */
-  return json({ posts });
+  return { posts };
 }
 
 export default function PostsIndex() {

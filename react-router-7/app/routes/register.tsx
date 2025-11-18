@@ -1,5 +1,5 @@
 import type { MetaFunction, ActionFunctionArgs, LoaderFunctionArgs } from "react-router";
-import { json, redirect } from "react-router";
+import { redirect } from "react-router";
 import { Form, Link, useActionData } from "react-router";
 import { Card } from "~/components/ui/Card";
 import { Input } from "~/components/ui/Input";
@@ -23,7 +23,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     return redirect("/");
   }
 
-  return json({});
+  return {};
 }
 
 export async function action({ request }: ActionFunctionArgs) {
@@ -65,7 +65,7 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   if (Object.keys(errors).length > 0) {
-    return json({ errors }, { status: 400 });
+    throw Response.json({ errors }, { status: 400 });
   }
 
   /**
@@ -78,7 +78,7 @@ export async function action({ request }: ActionFunctionArgs) {
   );
 
   if (result.error) {
-    return json(
+    throw Response.json(
       {
         errors: {
           email: result.error,
@@ -89,7 +89,7 @@ export async function action({ request }: ActionFunctionArgs) {
   }
 
   if (!result.user) {
-    return json(
+    throw Response.json(
       {
         errors: {
           email: "회원가입 중 오류가 발생했습니다.",

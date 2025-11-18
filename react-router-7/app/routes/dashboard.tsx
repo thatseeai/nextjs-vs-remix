@@ -1,5 +1,4 @@
 import type { LoaderFunctionArgs } from "react-router";
-import { json } from "@react-router/node";
 import { Link, Outlet, useLocation } from "react-router";
 import { Card } from "~/components/ui/Card";
 
@@ -34,7 +33,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
    * 세션을 확인하여 로그인 여부를 체크합니다.
    * 예: const user = await requireUser(request);
    */
-  return json({});
+  return {};
 }
 
 export default function DashboardLayout() {
