@@ -19,6 +19,7 @@ import { route, index, layout } from "@react-router/dev/routes";
 export default [
   index("routes/_index.tsx"),
   route("about", "routes/about.tsx"),
+  route("docs", "routes/docs.tsx"),
   route("blog", "routes/blog.tsx"),
   route("client-demo", "routes/client-demo.tsx"),
   route("login", "routes/login.tsx"),
