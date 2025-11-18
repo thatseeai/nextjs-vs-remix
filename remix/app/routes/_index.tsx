@@ -15,11 +15,11 @@ import type { MetaFunction } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Next.js vs Remix vs React Router 7 - 3-way 비교 프로젝트" },
+    { title: "Remix v2 - 프레임워크 비교 프로젝트" },
     {
       name: "description",
       content:
-        "세 프레임워크의 성능, 기능, 개발자 경험을 정량적으로 비교하는 프로젝트입니다.",
+        "Next.js, Remix, React Router 7의 성능과 기능을 정량적으로 비교하는 프로젝트입니다.",
     },
   ];
 };

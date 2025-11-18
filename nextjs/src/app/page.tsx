@@ -14,8 +14,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Next.js vs Remix vs React Router 7 - 3-way 비교 프로젝트',
-  description: '세 프레임워크의 성능, 기능, 개발자 경험을 정량적으로 비교하는 프로젝트입니다.',
+  title: 'Next.js 15 - 프레임워크 비교 프로젝트',
+  description: 'Next.js, Remix, React Router 7의 성능과 기능을 정량적으로 비교하는 프로젝트입니다.',
 };
 
 export default function Home() {
