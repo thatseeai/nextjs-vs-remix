@@ -1,21 +1,23 @@
-# Next.js vs Remix 비교 프로젝트 생성 지시서
+# Next.js vs Remix vs React Router 7 비교 프로젝트 생성 지시서
 
 ## 📋 프로젝트 개요
 
-Next.js와 Remix 프레임워크의 **정량적 비교**를 위한 동일한 기능을 가진 두 개의 독립적인 웹 애플리케이션을 생성합니다.
+Next.js, Remix, React Router 7 프레임워크의 **정량적 비교**를 위한 동일한 기능을 가진 세 개의 독립적인 웹 애플리케이션을 생성합니다.
 
 ### 🔧 버전 요구사항
 - **Next.js**: 공식 최신 안정화 버전 (v15.x 이상)
 - **Remix**: 공식 최신 안정화 버전 (v2.x 이상, Vite 기반)
-- **Vite**: 최신 버전 (v5.x 이상) - Remix 및 개발 도구로 활용
+- **React Router**: 공식 최신 안정화 버전 (v7.x 이상, Vite 기반)
+- **Vite**: 최신 버전 (v5.x 이상) - Remix, React Router 및 개발 도구로 활용
 - **Node.js**: 20.x LTS 이상 권장
 
 ## 🎯 핵심 목표
 
-- **동일한 기능과 UI**: 두 프레임워크에서 100% 동일한 사용자 경험 제공
+- **동일한 기능과 UI**: 세 프레임워크에서 100% 동일한 사용자 경험 제공
 - **정량적 비교**: 성능 지표, 번들 크기, 빌드 시간 등 측정 가능한 데이터 포함
-- **교육적 가치**: 신입 개발자가 두 프레임워크를 학습할 수 있는 완벽한 예제
+- **교육적 가치**: 신입 개발자가 세 프레임워크를 학습할 수 있는 완벽한 예제
 - **실무 적용 가능**: 실제 프로덕션 환경에서 사용 가능한 수준의 코드 품질
+- **마이그레이션 가이드**: Remix → React Router 7 마이그레이션 경로 제시
 
 ## 📁 프로젝트 구조
 
@@ -24,7 +26,7 @@ project-root/
 ├── nextjs/                 # Next.js 애플리케이션
 │   ├── src/
 │   ├── tests/
-│   ├── next.config.js      # Next.js 15 설정
+│   ├── next.config.js      # Next.js 16 설정
 │   ├── package.json
 │   └── README.md
 ├── remix/                  # Remix 애플리케이션 (Vite 기반)
@@ -33,10 +35,17 @@ project-root/
 │   ├── vite.config.ts      # Vite 설정
 │   ├── package.json
 │   └── README.md
+├── react-router-7/         # React Router 7 애플리케이션 (Vite 기반)
+│   ├── app/
+│   ├── tests/
+│   ├── vite.config.ts      # Vite 설정
+│   ├── package.json
+│   └── README.md
 ├── docs/                   # 비교 문서
-│   ├── comparison.md       # 상세 비교 분석
+│   ├── comparison.md       # 상세 비교 분석 (3-way)
 │   ├── metrics.md         # 성능 지표
-│   └── decision-guide.md  # 선택 가이드
+│   ├── decision-guide.md  # 선택 가이드
+│   └── remix-to-rr7.md   # Remix → React Router 7 마이그레이션 가이드
 ├── shared/                # 공통 개발 도구
 │   └── vite-analyzer/     # Vite 번들 분석 도구
 └── README.md              # 프로젝트 전체 개요
@@ -140,6 +149,30 @@ project-root/
    - Streaming 지원
    - **데이터 로딩 성능 비교**
 
+### React Router 7 고유 기능 (v7+ with Vite)
+1. **React Router v7 프레임워크 모드**
+   - Remix v2의 모든 기능을 React Router에 통합
+   - 파일 기반 라우팅 + Type Safety
+   - **Remix 대비 개선된 DX**
+   - **타입 안정성 개선 측정**
+
+2. **Static Pre-rendering**
+   - 빌드 타임 정적 생성 지원
+   - Route별 pre-rendering 설정
+   - **SSG 성능 비교**
+
+3. **Modern React Features**
+   - React 19 최신 기능 지원
+   - Server Components 실험적 지원
+   - Suspense 기반 데이터 페칭
+   - **최신 React 기능 활용도**
+
+4. **Improved Developer Experience**
+   - 더 나은 에러 메시지
+   - 향상된 타입 추론
+   - Vite 5+ 최적화
+   - **개발 생산성 지표**
+
 ### Vite 도구 활용 영역
 1. **개발 도구 통합**
    ```javascript
@@ -175,55 +208,58 @@ project-root/
 ## 📊 비교 문서 구조 (docs/comparison.md)
 
 ```markdown
-# Next.js vs Remix 상세 비교
+# Next.js vs Remix vs React Router 7 상세 비교
 
 ## 1. 성능 지표 비교
-| 지표 | Next.js 15 | Remix v2 (Vite) | 차이(%) |
-|------|------------|-----------------|---------|
-| 초기 로딩 시간 (FCP) | X.XXs | X.XXs | ±XX% |
-| 번들 크기 | XXX KB | XXX KB | ±XX% |
-| 빌드 시간 (프로덕션) | XX초 | XX초 | ±XX% |
-| 개발 서버 시작 시간 | X.Xs | X.Xs | ±XX% |
-| HMR 업데이트 시간 | XXms | XXms | ±XX% |
-| 메모리 사용량 | XXX MB | XXX MB | ±XX% |
+| 지표 | Next.js 16 | Remix v2 | React Router 7 | 최고 성능 |
+|------|------------|----------|----------------|-----------|
+| 초기 로딩 시간 (FCP) | X.XXs | X.XXs | X.XXs | 🏆 |
+| 번들 크기 | XXX KB | XXX KB | XXX KB | 🏆 |
+| 빌드 시간 (프로덕션) | XX초 | XX초 | XX초 | 🏆 |
+| 개발 서버 시작 시간 | X.Xs | X.Xs | X.Xs | 🏆 |
+| HMR 업데이트 시간 | XXms | XXms | XXms | 🏆 |
+| 메모리 사용량 | XXX MB | XXX MB | XXX MB | 🏆 |
 
 ## 2. 빌드 도구 비교
-| 항목 | Next.js (Turbopack) | Remix (Vite) | 평가 |
-|------|-------------------|--------------|------|
-| 콜드 스타트 | X.Xs | X.Xs | 측정값... |
-| 리빌드 시간 | XXms | XXms | 측정값... |
-| 트리 쉐이킹 효율 | XX% | XX% | 분석... |
-| 코드 스플리팅 | 자동 | 수동/자동 | 설명... |
-| 플러그인 생태계 | Webpack/Turbo | Vite/Rollup | 비교... |
+| 항목 | Next.js (Turbopack) | Remix (Vite) | React Router 7 (Vite) | 평가 |
+|------|-------------------|--------------|----------------------|------|
+| 콜드 스타트 | X.Xs | X.Xs | X.Xs | 측정값... |
+| 리빌드 시간 | XXms | XXms | XXms | 측정값... |
+| 트리 쉐이킹 효율 | XX% | XX% | XX% | 분석... |
+| 코드 스플리팅 | 자동 | 수동/자동 | 자동 | 설명... |
+| 플러그인 생태계 | Webpack/Turbo | Vite/Rollup | Vite/Rollup | 비교... |
 
 ## 3. 개발자 경험 (DX) 비교
-| 항목 | Next.js 15 | Remix v2 | 평가 |
-|------|------------|----------|------|
-| 학습 곡선 | 중간 | 높음 | 설명... |
-| 문서 품질 | 우수 | 우수 | 설명... |
-| 타입 안정성 | 우수 | 우수 | TypeScript 지원... |
-| 디버깅 도구 | React DevTools + Next DevTools | React DevTools + Vite DevTools | 비교... |
-| 커뮤니티 크기 | 대규모 (XXXk stars) | 중규모 (XXk stars) | GitHub 통계... |
+| 항목 | Next.js 16 | Remix v2 | React Router 7 | 평가 |
+|------|------------|----------|----------------|------|
+| 학습 곡선 | 중간 | 높음 | 중간 | 설명... |
+| 문서 품질 | 우수 | 우수 | 우수 | 설명... |
+| 타입 안정성 | 우수 | 우수 | 최고 | TypeScript 지원... |
+| 디버깅 도구 | Next DevTools | Vite DevTools | Vite DevTools | 비교... |
+| 커뮤니티 크기 | 대규모 | 중규모 | 성장 중 | GitHub 통계... |
+| Remix 마이그레이션 | N/A | N/A | 쉬움 | 호환성... |
 
 ## 4. 테스트 성능 비교 (Vitest)
-| 측정 항목 | Next.js 15 | Remix v2 | 차이(%) |
-|-----------|------------|----------|---------|
-| 전체 테스트 실행 시간 | XX.Xs | XX.Xs | ±XX% |
-| 단일 파일 테스트 시간 | XXms | XXms | ±XX% |
-| Watch 모드 재실행 시간 | XXms | XXms | ±XX% |
-| 커버리지 생성 시간 | X.Xs | X.Xs | ±XX% |
-| 병렬 실행 효율성 | XX% | XX% | ±XX% |
-| 메모리 사용량 (테스트) | XXX MB | XXX MB | ±XX% |
+| 측정 항목 | Next.js 16 | Remix v2 | React Router 7 | 최고 성능 |
+|-----------|------------|----------|----------------|-----------|
+| 전체 테스트 실행 시간 | XX.Xs | XX.Xs | XX.Xs | 🏆 |
+| 단일 파일 테스트 시간 | XXms | XXms | XXms | 🏆 |
+| Watch 모드 재실행 시간 | XXms | XXms | XXms | 🏆 |
+| 커버리지 생성 시간 | X.Xs | X.Xs | X.Xs | 🏆 |
+| 병렬 실행 효율성 | XX% | XX% | XX% | 🏆 |
+| 메모리 사용량 (테스트) | XXX MB | XXX MB | XXX MB | 🏆 |
 
 ## 5. 기능별 코드 비교
 ### 5.1 라우팅 예제
-[Next.js 15 App Router 코드]
+[Next.js 16 App Router 코드]
 [Remix v2 Route Modules 코드]
+[React Router 7 Route Modules 코드]
 [차이점 분석]
 
 ### 5.2 테스트 코드 예제 (Vitest)
 [Next.js 컴포넌트 테스트]
 [Remix 컴포넌트 테스트]
+[React Router 7 컴포넌트 테스트]
 [테스트 설정 차이점]
 
 ... (각 기능별 상세 비교)
@@ -580,17 +616,19 @@ export default defineConfig({
 
 ## ✅ 완료 기준
 
-1. **기능 완성도**: 모든 기능이 두 플랫폼에서 동일하게 동작
-2. **버전 준수**: 
-   - Next.js 15.x 최신 안정화 버전 사용
+1. **기능 완성도**: 모든 기능이 세 플랫폼에서 동일하게 동작
+2. **버전 준수**:
+   - Next.js 15.x+ 최신 안정화 버전 사용
    - Remix 2.x 최신 안정화 버전 (Vite 기반) 사용
+   - React Router 7.x+ 최신 안정화 버전 (Vite 기반) 사용
 3. **테스트 커버리지**: Unit 80% 이상, E2E 주요 시나리오 100%
-4. **성능 측정**: 
+4. **성능 측정**:
    - 모든 지표에 대한 정량적 데이터 수집 완료
    - Turbopack vs Vite 빌드 성능 비교 데이터
-   - HMR 성능 비교 데이터
+   - HMR 성능 비교 데이터 (3-way)
+   - Remix vs React Router 7 성능 차이 측정
 5. **문서화**: 한글 문서 100% 완성, 코드 주석 충실도 90% 이상
-6. **코드 품질**: 
+6. **코드 품질**:
    - ESLint 에러 0개
    - TypeScript 컴파일 에러 0개 (strict mode)
    - Lighthouse 점수 각 항목 90점 이상
@@ -602,15 +640,19 @@ export default defineConfig({
    - Vite/Turbopack 설정 최적화 완료
    - 번들 크기 최적화 (Tree-shaking, Code-splitting)
    - 개발/프로덕션 환경 분리 설정
+9. **마이그레이션 가이드**:
+   - Remix → React Router 7 마이그레이션 문서 작성
+   - 호환성 이슈 및 해결 방법 포함
 
 ## 🎯 최종 산출물
 
-1. **소스 코드**: /nextjs, /remix 폴더의 완전한 애플리케이션
-2. **비교 문서**: 15개 이상의 비교 항목에 대한 정량적 분석
-3. **테스트 스위트**: 
+1. **소스 코드**: /nextjs, /remix, /react-router-7 폴더의 완전한 애플리케이션
+2. **비교 문서**: 15개 이상의 비교 항목에 대한 정량적 분석 (3-way)
+3. **테스트 스위트**:
    - Vitest 기반 유닛 테스트 (커버리지 80% 이상)
-   - Playwright/Cypress E2E 테스트
-   - 테스트 실행 성능 비교 리포트
+   - Playwright E2E 테스트
+   - 테스트 실행 성능 비교 리포트 (3-way)
+4. **마이그레이션 가이드**: Remix → React Router 7 상세 가이드
 4. **의사결정 가이드**: 어떤 상황에서 어떤 프레임워크를 선택해야 하는지
 5. **성능 리포트**: 
    - 런타임 성능 벤치마크
