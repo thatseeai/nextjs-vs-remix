@@ -1,81 +1,118 @@
-import type { MetaFunction, LoaderFunctionArgs } from "react-router";
-import { useLoaderData } from "react-router";
-import { Card } from "~/components/ui/Card";
-import { formatDate, timeAgo } from "~/lib/utils";
-
 /**
- * 컴포넌트명: Blog
- * 용도: 블로그 목록 페이지 (SSG 시뮬레이션)
+ * 페이지명: Blog (SSG)
+ * 용도: 블로그 페이지 (정적 사이트 생성 - SSG)
  *
  * [React Router 7 특징]
- * - loader: 서버에서 데이터 페칭
+ * - loader: 서버에서 데이터를 가져옴 (SSR/SSG)
  * - Cache-Control 헤더로 캐싱 제어
  * - 정적 콘텐츠 최적화
+ *
+ * [신입 개발자를 위한 설명]
+ * SSG는 빌드 시 페이지를 미리 생성하여 HTML 파일로 저장합니다.
+ * 사용자가 접근할 때는 이미 만들어진 HTML을 바로 제공하므로
+ * 매우 빠르며 서버 부하가 적습니다. 콘텐츠가 자주 변경되지 않는
+ * 블로그, 문서 사이트 등에 적합합니다.
  */
+
+import type { MetaFunction, LoaderFunctionArgs } from "react-router";
+import { useLoaderData, Link } from "react-router";
+import { Card, CardBody, CardHeader } from "~/components/ui/Card";
+import { formatDate } from "~/lib/utils";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "블로그 - React Router 7 App" },
-    { name: "description", content: "React Router 7 블로그 게시글" },
+    { title: "블로그 - Next.js vs Remix" },
+    { name: "description", content: "Next.js와 Remix 비교 블로그" },
   ];
 };
 
+/**
+ * 블로그 포스트 타입
+ */
 interface BlogPost {
   id: string;
   title: string;
   excerpt: string;
+  content: string;
   author: string;
   publishedAt: string;
-  category: string;
-  readTime: number;
+  tags: string[];
 }
 
+/**
+ * loader 함수
+ *
+ * [React Router 7의 데이터 로딩]
+ * loader는 서버에서 실행되어 페이지에 필요한 데이터를 가져옵니다.
+ * Cache-Control 헤더로 캐싱을 제어하여 SSG와 유사한 효과를 냅니다.
+ */
 export async function loader({ request }: LoaderFunctionArgs) {
   /**
-   * [더미 블로그 데이터]
+   * 정적 블로그 데이터
+   * 실제 프로젝트에서는 CMS나 마크다운 파일에서 가져옵니다.
    */
   const blogPosts: BlogPost[] = [
     {
       id: "1",
-      title: "React Router 7 마이그레이션 가이드",
+      title: "Next.js 16의 새로운 기능들",
       excerpt:
-        "React Router 7 v1에서 v2로 마이그레이션하는 완벽한 가이드. Vite 통합과 주요 변경사항을 다룹니다.",
-      author: "개발팀",
-      publishedAt: new Date("2024-01-20").toISOString(),
-      category: "Tutorial",
-      readTime: 8,
+        "Next.js 16에서 추가된 Turbopack, 향상된 캐싱 시스템, 그리고 성능 개선 사항을 알아봅니다.",
+      content: "...",
+      author: "김개발",
+      publishedAt: "2025-01-15",
+      tags: ["Next.js", "성능", "Turbopack"],
     },
     {
       id: "2",
-      title: "Vite의 장점과 활용법",
+      title: "Remix v2의 Vite 통합",
       excerpt:
-        "왜 Vite를 사용해야 하는가? 빠른 개발 경험과 최적화된 빌드를 제공하는 Vite의 모든 것.",
-      author: "김개발",
-      publishedAt: new Date("2024-01-18").toISOString(),
-      category: "Technology",
-      readTime: 6,
+        "Remix v2에서 Vite를 기본 번들러로 채택하면서 개발 경험이 크게 향상되었습니다.",
+      content: "...",
+      author: "이프론트",
+      publishedAt: "2025-01-10",
+      tags: ["Remix", "Vite", "빌드 도구"],
     },
     {
       id: "3",
-      title: "TypeScript 베스트 프랙티스",
+      title: "Server Components vs Loaders",
       excerpt:
-        "실무에서 바로 적용할 수 있는 TypeScript 활용 팁과 패턴. 타입 안정성을 높이는 방법.",
-      author: "이타입",
-      publishedAt: new Date("2024-01-15").toISOString(),
-      category: "Best Practices",
-      readTime: 10,
+        "Next.js의 Server Components와 Remix의 Loaders를 비교하여 각각의 장단점을 분석합니다.",
+      content: "...",
+      author: "박풀스택",
+      publishedAt: "2025-01-05",
+      tags: ["비교", "Server Components", "Loaders"],
+    },
+    {
+      id: "4",
+      title: "SEO 최적화 전략 비교",
+      excerpt: "두 프레임워크에서 SEO를 최적화하는 방법과 메타데이터 관리 전략을 살펴봅니다.",
+      content: "...",
+      author: "최웹마스터",
+      publishedAt: "2025-01-01",
+      tags: ["SEO", "메타데이터", "최적화"],
+    },
+    {
+      id: "5",
+      title: "폼 처리: Server Actions vs Form Actions",
+      excerpt:
+        "Next.js의 Server Actions와 Remix의 Form Actions를 비교하여 폼 처리 방식의 차이를 알아봅니다.",
+      content: "...",
+      author: "정리액트",
+      publishedAt: "2024-12-28",
+      tags: ["폼", "Server Actions", "Form Actions"],
+    },
+    {
+      id: "6",
+      title: "번들 크기 최적화 기법",
+      excerpt:
+        "코드 스플리팅, 트리 쉐이킹, 동적 임포트 등을 활용한 번들 크기 최적화 방법을 소개합니다.",
+      content: "...",
+      author: "강최적화",
+      publishedAt: "2024-12-25",
+      tags: ["최적화", "번들", "성능"],
     },
   ];
 
-  /**
-   * [캐싱 설정]
-   * Cache-Control 헤더로 브라우저 및 CDN 캐싱 제어
-   * - public: CDN에서 캐시 가능
-   * - max-age=300: 5분간 캐시
-   * - s-maxage=600: CDN에서 10분간 캐시
-   *
-   * Note: headers가 필요한 경우 Response.json() 사용
-   */
   return Response.json(
     { blogPosts },
     {
@@ -83,78 +120,118 @@ export async function loader({ request }: LoaderFunctionArgs) {
         "Cache-Control": "public, max-age=300, s-maxage=600",
       },
     }
-  ) as Response & { blogPosts: typeof blogPosts };
+  );
 }
 
-export default function Blog() {
+/**
+ * 블로그 목록 페이지
+ */
+export default function BlogPage() {
   const { blogPosts } = useLoaderData<typeof loader>();
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">블로그</h1>
-          <p className="text-lg text-gray-600">
-            React Router 7와 웹 개발에 대한 인사이트를 공유합니다.
-          </p>
-        </div>
+    <div className="max-w-7xl mx-auto px-4 py-12">
+      <div className="mb-12 text-center">
+        <h1 className="text-4xl font-bold text-gray-900 mb-4">개발 블로그</h1>
+        <p className="text-xl text-gray-600">
+          Next.js와 Remix에 대한 인사이트와 비교 분석
+        </p>
+      </div>
 
-        <div className="space-y-6">
-          {blogPosts.map((post) => (
-            <Card key={post.id} hoverable>
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <div className="flex items-center space-x-2 mb-2">
-                    <span className="px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded">
-                      {post.category}
-                    </span>
-                    <span className="text-sm text-gray-500">
-                      {post.readTime}분 읽기
-                    </span>
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                    {post.title}
-                  </h2>
-                  <p className="text-gray-600 mb-4">{post.excerpt}</p>
-                  <div className="flex items-center text-sm text-gray-500 space-x-4">
-                    <span className="flex items-center">
-                      <svg
-                        className="h-4 w-4 mr-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                        />
-                      </svg>
-                      {post.author}
-                    </span>
-                    <span className="flex items-center">
-                      <svg
-                        className="h-4 w-4 mr-1"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={2}
-                          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                        />
-                      </svg>
-                      {timeAgo(post.publishedAt)}
-                    </span>
-                  </div>
+      {/* 주요 포스트 */}
+      {blogPosts.length > 0 && (
+        <div className="mb-12">
+          <Card hoverable>
+            <div className="md:flex">
+              <div className="md:w-1/3 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center p-12">
+                <div className="text-center text-white">
+                  <h3 className="text-3xl font-bold mb-2">Featured</h3>
+                  <p className="text-blue-100">주요 포스트</p>
                 </div>
               </div>
-            </Card>
-          ))}
+              <div className="md:w-2/3 p-8">
+                <div className="flex items-center space-x-2 mb-4">
+                  {blogPosts[0].tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h2 className="text-3xl font-bold text-gray-900 mb-4">{blogPosts[0].title}</h2>
+                <p className="text-gray-600 mb-6">{blogPosts[0].excerpt}</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4 text-sm text-gray-500">
+                    <span>{blogPosts[0].author}</span>
+                    <span>•</span>
+                    <span>{formatDate(blogPosts[0].publishedAt)}</span>
+                  </div>
+                  <Link
+                    to={`/blog/${blogPosts[0].id}`}
+                    className="text-blue-600 hover:text-blue-700 font-medium"
+                  >
+                    자세히 읽기 →
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </Card>
         </div>
+      )}
+
+      {/* 포스트 목록 */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {blogPosts.slice(1).map((post) => (
+          <Link key={post.id} to={`/blog/${post.id}`}>
+            <Card hoverable className="h-full">
+              <CardHeader>
+                <div className="flex flex-wrap gap-2 mb-3">
+                  {post.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2 py-1 bg-gray-100 text-gray-700 text-xs rounded"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 line-clamp-2">
+                  {post.title}
+                </h3>
+              </CardHeader>
+              <CardBody>
+                <p className="text-gray-600 line-clamp-3 mb-4">{post.excerpt}</p>
+                <div className="flex items-center justify-between text-sm text-gray-500">
+                  <span>{post.author}</span>
+                  <span>{formatDate(post.publishedAt)}</span>
+                </div>
+              </CardBody>
+            </Card>
+          </Link>
+        ))}
+      </div>
+
+      {/* 카테고리 필터 (추후 구현) */}
+      <div className="mt-12">
+        <Card>
+          <CardHeader>
+            <h3 className="text-lg font-semibold text-gray-900">카테고리</h3>
+          </CardHeader>
+          <CardBody>
+            <div className="flex flex-wrap gap-2">
+              {["전체", "Next.js", "Remix", "성능", "최적화", "SEO", "비교"].map((category) => (
+                <button
+                  key={category}
+                  className="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg transition-colors"
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </CardBody>
+        </Card>
       </div>
     </div>
   );

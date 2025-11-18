@@ -1,295 +1,171 @@
-import type { MetaFunction } from "react-router";
-import { Card } from "~/components/ui/Card";
-
 /**
- * 컴포넌트명: About
- * 용도: 소개 페이지 (정적 라우트 예제)
+ * 페이지명: About
+ * 용도: 프로젝트 소개 페이지 (정적 라우트)
  *
  * [React Router 7 특징]
- * - 파일명이 라우트 경로가 됨 (about.tsx → /about)
- * - meta 함수로 SEO 메타데이터 설정
- * - 정적 콘텐츠이므로 loader 불필요
+ * - 정적 라우트: /about 경로로 접근
+ * - Server Component로 구현하여 SEO 최적화
+ * - meta 함수를 통한 페이지 정보 설정
  *
  * [신입 개발자를 위한 설명]
- * 이 페이지는 정적 콘텐츠를 표시하는 기본 예제입니다.
- * 서버에서 데이터를 가져올 필요 없이 HTML만 렌더링합니다.
- *
- * [라우팅]
- * - 파일 위치: app/routes/about.tsx
- * - URL 경로: /about
- * - 라우트 타입: 정적 (Static Route)
+ * 정적 라우트는 고정된 경로를 가진 페이지입니다.
+ * React Router 7에서는 기본적으로 서버에서 렌더링되어 클라이언트로 전송되므로
+ * 검색 엔진 최적화(SEO)에 유리하고 초기 로딩이 빠릅니다.
  */
 
-/**
- * [메타 함수]
- * 페이지의 <title>, <meta> 태그를 설정합니다.
- * SEO 최적화에 중요한 역할을 합니다.
- */
+import type { MetaFunction } from "react-router";
+import { Card, CardBody, CardHeader } from "~/components/ui/Card";
+
 export const meta: MetaFunction = () => {
   return [
-    { title: "소개 - React Router 7 App" },
-    {
-      name: "description",
-      content: "React Router 7와 Vite를 활용한 현대적인 웹 애플리케이션 소개",
-    },
-    { property: "og:title", content: "소개 - React Router 7 App" },
-    { property: "og:type", content: "website" },
+    { title: "소개 - Next.js vs Remix" },
+    { name: "description", content: "Next.js와 Remix 프레임워크 비교 프로젝트 소개" },
   ];
 };
 
-export default function About() {
+export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        {/* 페이지 헤더 */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            React Router 7 App 소개
-          </h1>
-          <p className="text-lg text-gray-600">
-            React Router 7와 Vite를 활용한 현대적인 웹 애플리케이션
-          </p>
-        </div>
+    <div className="max-w-4xl mx-auto px-4 py-12">
+      <h1 className="text-4xl font-bold text-gray-900 mb-8">프로젝트 소개</h1>
 
-        {/* 주요 특징 */}
-        <div className="grid gap-6 md:grid-cols-2 mb-12">
-          <Card>
-            <div className="flex items-start">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-blue-600 text-white">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M13 10V3L4 14h7v7l9-11h-7z"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-4">
-                <h3 className="text-lg font-medium text-gray-900">
-                  빠른 성능
-                </h3>
-                <p className="mt-2 text-base text-gray-600">
-                  Vite의 빠른 HMR과 React Router 7의 서버 사이드 렌더링으로
-                  최고의 성능을 제공합니다.
-                </p>
-              </div>
-            </div>
-          </Card>
-
-          <Card>
-            <div className="flex items-start">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-green-600 text-white">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-4">
-                <h3 className="text-lg font-medium text-gray-900">
-                  타입 안정성
-                </h3>
-                <p className="mt-2 text-base text-gray-600">
-                  TypeScript를 사용하여 개발 시 오류를 미리 발견하고
-                  안전한 코드를 작성할 수 있습니다.
-                </p>
-              </div>
-            </div>
-          </Card>
-
-          <Card>
-            <div className="flex items-start">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-purple-600 text-white">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-4">
-                <h3 className="text-lg font-medium text-gray-900">
-                  Progressive Enhancement
-                </h3>
-                <p className="mt-2 text-base text-gray-600">
-                  JavaScript 없이도 동작하며, 점진적으로 향상되는
-                  사용자 경험을 제공합니다.
-                </p>
-              </div>
-            </div>
-          </Card>
-
-          <Card>
-            <div className="flex items-start">
-              <div className="flex-shrink-0">
-                <div className="flex items-center justify-center h-12 w-12 rounded-md bg-yellow-600 text-white">
-                  <svg
-                    className="h-6 w-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <div className="ml-4">
-                <h3 className="text-lg font-medium text-gray-900">
-                  개발자 경험
-                </h3>
-                <p className="mt-2 text-base text-gray-600">
-                  우수한 문서, 활발한 커뮤니티, 그리고 강력한 개발 도구로
-                  생산성을 극대화합니다.
-                </p>
-              </div>
-            </div>
-          </Card>
-        </div>
+      <div className="space-y-6">
+        {/* 프로젝트 개요 */}
+        <Card>
+          <CardHeader>
+            <h2 className="text-2xl font-semibold text-gray-900">프로젝트 개요</h2>
+          </CardHeader>
+          <CardBody>
+            <p className="text-gray-700 leading-relaxed">
+              이 프로젝트는 <strong>Next.js</strong>와 <strong>Remix</strong> 프레임워크를
+              정량적으로 비교하기 위해 제작되었습니다. 동일한 기능을 두 프레임워크로 구현하여
+              성능, 개발자 경험, 빌드 시간 등을 측정하고 비교합니다.
+            </p>
+          </CardBody>
+        </Card>
 
         {/* 기술 스택 */}
         <Card>
-          <Card.Header>
-            <h2 className="text-2xl font-bold text-gray-900">기술 스택</h2>
-          </Card.Header>
-          <Card.Body>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { name: "React Router 7", version: "v2.17" },
-                { name: "React", version: "v18.3" },
-                { name: "Vite", version: "v6.0" },
-                { name: "TypeScript", version: "v5.8" },
-                { name: "Tailwind CSS", version: "v3.4" },
-                { name: "Vitest", version: "v4.0" },
-                { name: "Playwright", version: "v1.56" },
-                { name: "Zustand", version: "v5.0" },
-              ].map((tech) => (
-                <div
-                  key={tech.name}
-                  className="flex flex-col items-center justify-center p-4 bg-gray-50 rounded-lg"
-                >
-                  <span className="font-semibold text-gray-900">
-                    {tech.name}
-                  </span>
-                  <span className="text-sm text-gray-600">{tech.version}</span>
-                </div>
-              ))}
+          <CardHeader>
+            <h2 className="text-2xl font-semibold text-gray-900">기술 스택</h2>
+          </CardHeader>
+          <CardBody>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <h3 className="text-lg font-semibold text-blue-600 mb-2">React Router 7 버전</h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li>• React Router 7.9.6</li>
+                  <li>• React 18.3.x</li>
+                  <li>• TypeScript 5.x</li>
+                  <li>• Tailwind CSS 4.x</li>
+                  <li>• Zustand (상태 관리)</li>
+                  <li>• Vitest (테스트)</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-purple-600 mb-2">공통 기능</h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li>• 라우팅 시스템 (정적, 동적, 중첩)</li>
+                  <li>• 데이터 페칭 (SSR, SSG, CSR)</li>
+                  <li>• 인증 시스템 (JWT)</li>
+                  <li>• API 라우트</li>
+                  <li>• 상태 관리</li>
+                  <li>• 국제화 (i18n)</li>
+                </ul>
+              </div>
             </div>
-          </Card.Body>
+          </CardBody>
+        </Card>
+
+        {/* 구현 기능 */}
+        <Card>
+          <CardHeader>
+            <h2 className="text-2xl font-semibold text-gray-900">구현된 핵심 기능</h2>
+          </CardHeader>
+          <CardBody>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-blue-900 mb-2">1. 라우팅</h4>
+                <p className="text-sm text-blue-700">
+                  정적 라우팅, 동적 라우팅, 중첩 레이아웃 구현
+                </p>
+              </div>
+              <div className="bg-green-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-green-900 mb-2">2. 데이터 페칭</h4>
+                <p className="text-sm text-green-700">
+                  SSR, SSG, CSR 방식 비교 및 성능 측정
+                </p>
+              </div>
+              <div className="bg-purple-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-purple-900 mb-2">3. 인증</h4>
+                <p className="text-sm text-purple-700">
+                  JWT 기반 세션 관리 및 보안 구현
+                </p>
+              </div>
+              <div className="bg-yellow-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-yellow-900 mb-2">4. API</h4>
+                <p className="text-sm text-yellow-700">
+                  REST API, 파일 업로드, 에러 처리
+                </p>
+              </div>
+              <div className="bg-red-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-red-900 mb-2">5. 스타일링</h4>
+                <p className="text-sm text-red-700">
+                  Tailwind CSS를 활용한 반응형 디자인
+                </p>
+              </div>
+              <div className="bg-indigo-50 p-4 rounded-lg">
+                <h4 className="font-semibold text-indigo-900 mb-2">6. 테스트</h4>
+                <p className="text-sm text-indigo-700">
+                  Vitest, Playwright를 활용한 테스트
+                </p>
+              </div>
+            </div>
+          </CardBody>
+        </Card>
+
+        {/* 성능 지표 */}
+        <Card>
+          <CardHeader>
+            <h2 className="text-2xl font-semibold text-gray-900">측정 지표</h2>
+          </CardHeader>
+          <CardBody>
+            <ul className="space-y-2 text-gray-700">
+              <li>
+                ✅ <strong>빌드 시간:</strong> 프로덕션 빌드 소요 시간
+              </li>
+              <li>
+                ✅ <strong>번들 크기:</strong> JavaScript 번들 크기
+              </li>
+              <li>
+                ✅ <strong>초기 로딩 시간:</strong> FCP, LCP 등 Core Web Vitals
+              </li>
+              <li>
+                ✅ <strong>HMR 속도:</strong> 개발 중 Hot Module Replacement 시간
+              </li>
+              <li>
+                ✅ <strong>테스트 실행 시간:</strong> Vitest 테스트 스위트 실행 시간
+              </li>
+              <li>
+                ✅ <strong>개발자 경험:</strong> 학습 곡선, 문서 품질, 타입 안정성
+              </li>
+            </ul>
+          </CardBody>
         </Card>
 
         {/* 프로젝트 목표 */}
-        <Card className="mt-6">
-          <Card.Header>
-            <h2 className="text-2xl font-bold text-gray-900">프로젝트 목표</h2>
-          </Card.Header>
-          <Card.Body>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <svg
-                  className="h-6 w-6 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-                <span className="text-gray-700">
-                  Next.js와 React Router 7의 정량적 비교를 통한 프레임워크 선택 가이드 제공
-                </span>
-              </li>
-              <li className="flex items-start">
-                <svg
-                  className="h-6 w-6 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-                <span className="text-gray-700">
-                  신입 개발자를 위한 실무 수준의 학습 자료 제공
-                </span>
-              </li>
-              <li className="flex items-start">
-                <svg
-                  className="h-6 w-6 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-                <span className="text-gray-700">
-                  프로덕션 환경에서 사용 가능한 코드 품질 유지
-                </span>
-              </li>
-              <li className="flex items-start">
-                <svg
-                  className="h-6 w-6 text-green-500 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
-                </svg>
-                <span className="text-gray-700">
-                  성능, 빌드 시간, 번들 크기 등 측정 가능한 데이터 수집
-                </span>
-              </li>
-            </ul>
-          </Card.Body>
+        <Card>
+          <CardHeader>
+            <h2 className="text-2xl font-semibold text-gray-900">프로젝트 목표</h2>
+          </CardHeader>
+          <CardBody>
+            <ol className="list-decimal list-inside space-y-2 text-gray-700">
+              <li>Next.js와 Remix의 실제 성능을 정량적으로 비교</li>
+              <li>각 프레임워크의 장단점을 명확히 파악</li>
+              <li>프로젝트 특성에 따른 프레임워크 선택 가이드 제공</li>
+              <li>신입 개발자를 위한 학습 자료로 활용</li>
+              <li>실무에 바로 적용 가능한 코드 패턴 제시</li>
+            </ol>
+          </CardBody>
         </Card>
       </div>
     </div>
