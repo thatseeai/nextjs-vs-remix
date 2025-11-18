@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
     }
 
     // 파일 타입 검증
-    if (!FILE_UPLOAD.ALLOWED_TYPES.includes(file.type)) {
+    if (!FILE_UPLOAD.ALLOWED_TYPES.includes(file.type as any)) {
       return NextResponse.json(
         { error: '지원하지 않는 파일 형식입니다. (JPG, PNG, GIF, WEBP만 가능)' },
         { status: HTTP_STATUS.BAD_REQUEST }
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
 
     // 파일 확장자 추출
     const fileExtension = file.name.split('.').pop()?.toLowerCase();
-    if (!fileExtension || !FILE_UPLOAD.ALLOWED_EXTENSIONS.includes(`.${fileExtension}`)) {
+    if (!fileExtension || !FILE_UPLOAD.ALLOWED_EXTENSIONS.includes(`.${fileExtension}` as any)) {
       return NextResponse.json(
         { error: '유효하지 않은 파일 확장자입니다.' },
         { status: HTTP_STATUS.BAD_REQUEST }
@@ -118,9 +118,10 @@ export async function POST(request: NextRequest) {
 
 /**
  * 설정: 파일 업로드 크기 제한
+ * Next.js 16에서는 App Router에서 config export가 지원되지 않음
  */
-export const config = {
-  api: {
-    bodyParser: false, // FormData 사용 시 필요
-  },
-};
+// export const config = {
+//   api: {
+//     bodyParser: false, // FormData 사용 시 필요
+//   },
+// };

@@ -37,9 +37,13 @@ export default defineConfig({
     cssCodeSplit: true,
     rollupOptions: {
       output: {
-        manualChunks: {
-          // 벤더 청크 분리로 캐싱 최적화
-          vendor: ["react", "react-dom"],
+        manualChunks: (id) => {
+          // SSR 빌드가 아닌 경우에만 벤더 청크 분리
+          if (id.includes('node_modules')) {
+            if (id.includes('react') || id.includes('react-dom')) {
+              return 'vendor';
+            }
+          }
         },
       },
     },

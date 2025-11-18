@@ -14,7 +14,7 @@
  * 비밀번호는 bcrypt로 해싱하여 저장하므로 원본을 알 수 없습니다.
  */
 
-import { SignJWT, jwtVerify } from 'jose';
+import { SignJWT, jwtVerify, type JWTPayload as JoseJWTPayload } from 'jose';
 import bcrypt from 'bcryptjs';
 import { JWT } from './constants';
 
@@ -30,7 +30,7 @@ const getJwtSecret = (): Uint8Array => {
 /**
  * JWT 페이로드 타입
  */
-export interface JWTPayload {
+export interface JWTPayload extends JoseJWTPayload {
   userId: string;
   email: string;
   name: string;
