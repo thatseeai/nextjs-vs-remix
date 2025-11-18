@@ -1,0 +1,58 @@
+/**
+ * Tailwind CSS 기본 스타일
+ *
+ * [Tailwind CSS Directives]
+ * @tailwind base: 기본 스타일 리셋 및 normalize
+ * @tailwind components: Tailwind 컴포넌트 클래스
+ * @tailwind utilities: 유틸리티 클래스
+ *
+ * [신입 개발자를 위한 설명]
+ * 이 파일은 Tailwind CSS의 모든 클래스를 활성화합니다.
+ * 실제로 사용한 클래스만 최종 CSS 번들에 포함됩니다.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/**
+ * 커스텀 기본 스타일
+ * 모든 페이지에 적용되는 기본 스타일입니다.
+ */
+@layer base {
+  html {
+    @apply h-full;
+  }
+
+  body {
+    @apply h-full bg-gray-50 text-gray-900;
+  }
+}
+
+/**
+ * 커스텀 컴포넌트 스타일
+ * 재사용 가능한 컴포넌트 스타일을 정의합니다.
+ */
+@layer components {
+  .btn-primary {
+    @apply px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors duration-200;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 transition-colors duration-200;
+  }
+
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6;
+  }
+}
+
+/**
+ * 커스텀 유틸리티 클래스
+ * 프로젝트 전체에서 사용할 유틸리티 클래스입니다.
+ */
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
