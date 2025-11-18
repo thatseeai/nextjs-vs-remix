@@ -24,7 +24,8 @@ export default [
   route("login", "routes/login.tsx"),
   route("register", "routes/register.tsx"),
 
-  layout("routes/dashboard.tsx", [
+  // dashboard 라우트 (중첩 라우트)
+  route("dashboard", "routes/dashboard.tsx", [
     index("routes/dashboard._index.tsx"),
     route("profile", "routes/dashboard.profile.tsx"),
   ]),
