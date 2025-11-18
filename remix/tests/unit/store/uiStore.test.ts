@@ -40,6 +40,9 @@ describe('uiStore - UI 스토어 (Remix)', () => {
       writable: true,
     });
 
+    // 스토어 초기화
+    useUIStore.getState().clearNotifications();
+
     // 타이머 초기화
     vi.clearAllTimers();
   });

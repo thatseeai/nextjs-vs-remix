@@ -48,6 +48,7 @@ export function formatDate(date: Date | string, includeTime = false): string {
   if (includeTime) {
     options.hour = '2-digit';
     options.minute = '2-digit';
+    options.hour12 = false; // 24시간 형식 사용
   }
 
   return new Intl.DateTimeFormat('ko-KR', options).format(d);

@@ -82,20 +82,22 @@ interface CardHeaderProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-Card.Header = function CardHeader({
+export function CardHeader({
   children,
   className = "",
   ...props
 }: CardHeaderProps) {
   return (
     <div
-      className={`border-b border-gray-200 pb-4 mb-4 ${className}`}
+      className={`px-6 py-4 border-b border-gray-200 ${className}`}
       {...props}
     >
       {children}
     </div>
   );
-};
+}
+
+Card.Header = CardHeader;
 
 /**
  * CardBody 컴포넌트
@@ -107,17 +109,19 @@ interface CardBodyProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-Card.Body = function CardBody({
+export function CardBody({
   children,
   className = "",
   ...props
 }: CardBodyProps) {
   return (
-    <div className={className} {...props}>
+    <div className={`px-6 py-4 ${className}`} {...props}>
       {children}
     </div>
   );
-};
+}
+
+Card.Body = CardBody;
 
 /**
  * CardFooter 컴포넌트
@@ -129,17 +133,19 @@ interface CardFooterProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
 }
 
-Card.Footer = function CardFooter({
+export function CardFooter({
   children,
   className = "",
   ...props
 }: CardFooterProps) {
   return (
     <div
-      className={`border-t border-gray-200 pt-4 mt-4 ${className}`}
+      className={`px-6 py-4 border-t border-gray-200 bg-gray-50 ${className}`}
       {...props}
     >
       {children}
     </div>
   );
-};
+}
+
+Card.Footer = CardFooter;
