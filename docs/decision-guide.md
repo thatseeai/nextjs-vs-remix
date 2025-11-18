@@ -1,60 +1,84 @@
-# Next.js vs Remix 선택 가이드
+# Next.js vs Remix vs React Router 7 선택 가이드
 
 > 프로젝트 요구사항에 따라 최적의 프레임워크를 선택하기 위한 의사결정 가이드입니다.
+
+## ⚡ 빠른 추천
+
+### 🥇 React Router 7 (신규 프로젝트 최우선 추천)
+- 최고 성능과 빌드 속도
+- Remix의 모든 기능 + 개선사항
+- 가장 가벼운 런타임
+
+### 🥈 Next.js 16 (안정적 선택)
+- 가장 큰 커뮤니티
+- 풍부한 기능과 SEO 도구
+- Vercel 배포 최적화
+
+### 🥉 Remix v2 (유지보수만)
+- 기존 프로젝트만 사용
+- React Router 7로 마이그레이션 권장
 
 ## 🎯 빠른 선택 플로우차트
 
 ```
-프로젝트 시작 결정
+신규 프로젝트 시작
         ↓
-성능이 최우선인가? ──Yes─→ Remix v2
+기존 Remix 프로젝트? ──Yes─→ React Router 7로 마이그레이션 (권장)
         ↓ No
         ↓
-Vercel에 배포하는가? ──Yes─→ Next.js 15
+성능이 최우선인가? ──Yes─→ React Router 7 🥇
         ↓ No
         ↓
-큰 팀 프로젝트인가? ──Yes─→ Next.js 15 (커뮤니티 지원)
+Vercel 배포 확정? ──Yes─→ Next.js 16
         ↓ No
         ↓
-웹 표준 중시하는가? ──Yes─→ Remix v2
+가장 큰 커뮤니티 필요? ──Yes─→ Next.js 16
         ↓ No
         ↓
-빠른 개발이 필요한가? ──Yes─→ Next.js 15 (풍부한 기능)
+웹 표준 중시? ──Yes─→ React Router 7
         ↓ No
         ↓
-엣지 배포가 필요한가? ──Yes─→ Remix v2 (Cloudflare)
+빠른 빌드 필수? ──Yes─→ React Router 7
         ↓ No
         ↓
-──→ 둘 다 좋은 선택입니다!
+ISR/SSG 필요? ──Yes─→ Next.js 16
+        ↓ No
+        ↓
+──→ React Router 7 추천! (종합 1위)
 ```
 
 ## 📊 1. 프로젝트 유형별 추천
 
 ### 1.1 전자상거래 (E-commerce)
 
-**추천: Next.js 15** 🏆
+**1순위: Next.js 16** 🥇
+**2순위: React Router 7** 🥈
 
 **이유**:
-- ✅ 우수한 SEO 도구 (사이트맵, OG 이미지 자동 생성)
-- ✅ ISR로 제품 페이지 효율적 캐싱
-- ✅ Image Optimization으로 제품 이미지 최적화
-- ✅ Server Actions로 간편한 장바구니 처리
-- ✅ Vercel의 Edge Network 활용
+- Next.js: ISR, SEO 도구, Image Optimization
+- React Router 7: 빠른 성능, 낮은 번들 크기
 
 **예시 프로젝트**: 온라인 쇼핑몰, 마켓플레이스
 
 ### 1.2 대시보드 / SaaS
 
-**추천: Remix v2** 🏆
+**1순위: React Router 7** 🥇
+**2순위: Next.js 16** 🥈
 
 **이유**:
-- ✅ 빠른 HMR로 개발 생산성 향상
-- ✅ 데이터 변경이 잦은 환경에 적합
-- ✅ 명시적인 데이터 흐름 (Loader/Action)
-- ✅ 복잡한 폼 처리에 유리
-- ✅ Progressive Enhancement
+- React Router 7: 최고 성능, 빠른 빌드, HMR
+- Next.js: 큰 커뮤니티, 풍부한 자료
 
 **예시 프로젝트**: CRM, 어드민 패널, 분석 도구
+
+### 1.3 신규 스타트업
+
+**1순위: React Router 7** 🥇
+**2순위: Next.js 16** 🥈
+
+**이유**:
+- React Router 7: 빠른 개발 사이클, 최고 성능
+- Next.js: 빠른 프로토타이핑, 큰 커뮤니티
 
 ### 1.3 블로그 / 콘텐츠 사이트
 

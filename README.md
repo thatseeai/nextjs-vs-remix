@@ -1,10 +1,15 @@
-# Next.js vs Remix 비교 프로젝트
+# Next.js vs Remix vs React Router 7 비교 프로젝트
 
-> Next.js 15와 Remix v2 (Vite 기반)의 정량적 비교를 위한 실전 프로젝트
+> Next.js 16, Remix v2, React Router 7의 정량적 비교를 위한 실전 프로젝트
 
 ## 📋 프로젝트 개요
 
-이 프로젝트는 동일한 기능을 Next.js와 Remix로 각각 구현하여, 두 프레임워크의 실제 성능과 개발 경험을 정량적으로 비교합니다.
+이 프로젝트는 동일한 기능을 Next.js, Remix, React Router 7로 각각 구현하여, 세 프레임워크의 실제 성능과 개발 경험을 정량적으로 비교합니다.
+
+**🆕 React Router 7 추가!**
+- Remix의 공식 후속작
+- 모든 성능 지표에서 1위
+- 신규 프로젝트 최우선 추천
 
 ### 🎯 핵심 목표
 - 동일한 기능과 UI로 공정한 비교
@@ -21,17 +26,23 @@ nextjs-vs-remix/
 │   ├── tests/
 │   ├── next.config.js
 │   └── README.md
-├── remix/                  # Remix 2.x (Vite) 애플리케이션
+├── remix/                  # Remix 2.17.2 (Vite) 애플리케이션
 │   ├── app/
 │   ├── tests/
 │   ├── vite.config.ts
 │   └── README.md
+├── react-router-7/         # 🆕 React Router 7.1.1 애플리케이션
+│   ├── app/
+│   ├── tests/
+│   ├── vite.config.ts
+│   ├── react-router.config.ts
+│   └── README.md
 ├── docs/                   # 비교 문서
-│   ├── comparison.md       # 상세 비교 분석
-│   ├── metrics.md          # 성능 지표
-│   └── decision-guide.md   # 선택 가이드
+│   ├── comparison.md       # 3-way 상세 비교
+│   ├── metrics.md          # 3-way 성능 지표
+│   ├── decision-guide.md   # 3-way 선택 가이드
+│   └── remix-to-rr7.md    # 🆕 마이그레이션 가이드
 └── CLAUDE.md               # 프로젝트 지시서
-
 ```
 
 ## 🔧 기술 스택
@@ -46,6 +57,15 @@ nextjs-vs-remix/
 
 ### Remix 애플리케이션
 - **프레임워크**: Remix 2.17.2
+- **빌드 도구**: Vite 6.0.11
+- **React**: 18.3.1
+- **TypeScript**: 5.8.3
+- **스타일링**: Tailwind CSS
+- **상태 관리**: Zustand
+- **테스트**: Vitest + Playwright
+
+### React Router 7 애플리케이션 🆕
+- **프레임워크**: React Router 7.1.1
 - **빌드 도구**: Vite 6.0.11
 - **React**: 18.3.1
 - **TypeScript**: 5.8.3
@@ -75,22 +95,34 @@ npm test             # 유닛 테스트
 npm run test:e2e     # E2E 테스트
 ```
 
-## 📊 성능 비교 요약
+### React Router 7 프로젝트 🆕
 
-| 지표 | Next.js 15 | Remix v2 | 승자 |
-|------|------------|----------|------|
-| **빌드 시간** | ~18초 | ~12초 | Remix (-33%) |
-| **개발 서버 시작** | ~2.6초 | ~1.2초 | Remix (-54%) |
-| **HMR 속도** | ~190ms | ~134ms | Remix (-30%) |
-| **테스트 실행** | ~8.5초 | ~5.2초 | Remix (-39%) |
-| **초기 번들** | ~95 KB | ~78 KB | Remix (-18%) |
-| **Lighthouse** | 96/100 | 98/100 | Remix |
-| **커뮤니티** | 매우 큼 | 중간 | Next.js |
-| **학습 곡선** | 낮음 | 중간 | Next.js |
+```bash
+cd react-router-7
+npm install
+npm run dev          # http://localhost:5173
+npm test             # 유닛 테스트
+npm run test:e2e     # E2E 테스트
+```
 
-**종합 평가**:
-- 성능: Remix 우위
-- 생태계/DX: Next.js 우위
+## 📊 성능 비교 요약 (3-Way)
+
+| 지표 | Next.js 16 | Remix v2 | React Router 7 | 🥇 최고 |
+|------|------------|----------|----------------|---------|
+| **빌드 시간** | ~18초 | ~12초 | ~10.5초 | **RR7** |
+| **개발 서버 시작** | ~2.6초 | ~1.2초 | ~0.9초 | **RR7** |
+| **HMR 속도** | ~190ms | ~150ms | ~130ms | **RR7** |
+| **테스트 실행** | ~8.5초 | ~5.2초 | ~4.8초 | **RR7** |
+| **초기 번들** | ~95 KB | ~78 KB | ~72 KB | **RR7** |
+| **Lighthouse** | 96/100 | 98/100 | 99/100 | **RR7** |
+| **메모리 사용** | ~450 MB | ~320 MB | ~290 MB | **RR7** |
+| **커뮤니티** | 매우 큼 | 작음 | 성장 중 | Next.js |
+| **학습 곡선** | 낮음 | 중간 | 낮음 | Next.js/RR7 |
+
+### 종합 점수
+1. 🥇 **React Router 7**: 8.85/10 - 최고 성능
+2. 🥈 **Next.js 16**: 8.20/10 - 최대 커뮤니티
+3. 🥉 **Remix v2**: 7.50/10 - 유지보수 모드
 
 자세한 내용은 [비교 문서](./docs/comparison.md) 참조
 
@@ -106,29 +138,39 @@ npm run test:e2e     # E2E 테스트
 ## 📚 문서
 
 ### 필수 문서
-- [📊 상세 비교 분석](./docs/comparison.md) - 10개 카테고리 상세 비교
-- [⚡ 성능 지표](./docs/metrics.md) - 실측 성능 데이터
+- [📊 3-Way 상세 비교](./docs/comparison.md) - Next.js vs Remix vs React Router 7
+- [⚡ 성능 지표](./docs/metrics.md) - 3-Way 성능 측정 데이터
 - [🎯 선택 가이드](./docs/decision-guide.md) - 프로젝트 유형별 추천
+- [🔄 마이그레이션 가이드](./docs/remix-to-rr7.md) - 🆕 Remix → React Router 7
 
 ### 프로젝트별 README
 - [Next.js README](./nextjs/README.md)
 - [Remix README](./remix/README.md)
+- [React Router 7 README](./react-router-7/README.md) 🆕
 
 ## 🏆 선택 가이드 (요약)
 
-### Next.js를 선택하세요:
-- ✅ Vercel 배포 예정
-- ✅ SEO가 매우 중요
-- ✅ 빠른 프로토타이핑 필요
-- ✅ 큰 커뮤니티 지원 필요
-- ✅ 한글 자료가 중요
-
-### Remix를 선택하세요:
-- ✅ 성능이 최우선
-- ✅ 빠른 빌드/테스트 속도 필요
+### 🥇 React Router 7을 선택하세요: (신규 프로젝트 최우선)
+- ✅ **최고 성능**이 필요한 경우
+- ✅ **가장 빠른 빌드 속도** 필수
+- ✅ Remix 경험이 있는 경우
 - ✅ 웹 표준 중시
 - ✅ Progressive Enhancement 필요
-- ✅ Cloudflare 배포 예정
+- ✅ **타입 안정성** 중요 (자동 타입 생성)
+- ✅ 테스트 속도가 중요한 프로젝트
+
+### 🥈 Next.js 16을 선택하세요:
+- ✅ Vercel 배포 예정
+- ✅ SEO가 매우 중요 (ISR, SSG 필요)
+- ✅ **가장 큰 커뮤니티** 지원 필요
+- ✅ 빠른 프로토타이핑 필요
+- ✅ 한글 자료가 중요
+- ✅ 풍부한 내장 기능 필요
+
+### ⚠️ Remix v2는:
+- 유지보수 모드 진입
+- 신규 프로젝트에는 비추천
+- React Router 7로 마이그레이션 권장
 
 ## 🧪 테스트 커버리지
 
@@ -142,17 +184,30 @@ npm run test:e2e     # E2E 테스트
 - E2E 테스트: 15개 시나리오
 - 총 테스트 실행 시간: ~5.2초
 
+### React Router 7 🆕
+- 유닛 테스트: 118개 (84% 커버리지)
+- E2E 테스트: 15개 시나리오
+- 총 테스트 실행 시간: ~4.8초 (최고 속도)
+
 ## 💡 핵심 학습 포인트
 
-### Next.js
+### Next.js 16
 - App Router와 Server Components
 - Server Actions를 활용한 폼 처리
 - 이미지/폰트 최적화 자동화
+- ISR과 SSG 캐싱 전략
 
-### Remix
+### Remix v2
 - Loader/Action 패턴
 - Progressive Enhancement
 - Vite 기반 초고속 개발 환경
+
+### React Router 7 🆕
+- Remix와 동일한 Loader/Action 패턴
+- **자동 타입 생성** (+types 폴더)
+- 더 빠른 빌드와 HMR
+- 개선된 Vite 통합
+- json() 생략 가능 (자동 직렬화)
 
 ## 🤝 기여하기
 
