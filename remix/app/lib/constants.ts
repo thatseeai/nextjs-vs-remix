@@ -20,19 +20,24 @@
 /**
  * [애플리케이션 메타데이터]
  * SEO 및 소셜 미디어 공유에 사용되는 기본 정보
+ *
+ * [Vite 환경 변수 주의사항]
+ * - Vite에서는 import.meta.env를 사용합니다
+ * - process.env는 Node.js 서버 환경에서만 사용 가능
+ * - 클라이언트 코드에서는 반드시 import.meta.env를 사용해야 합니다
  */
 export const APP_NAME = "Remix App";
 export const APP_DESCRIPTION =
   "Remix v2와 Vite를 활용한 현대적인 웹 애플리케이션";
-export const APP_URL = process.env.PUBLIC_APP_URL || "http://localhost:5173";
-export const APP_VERSION = process.env.VITE_APP_VERSION || "0.1.0";
+export const APP_URL = import.meta.env.PUBLIC_APP_URL || "http://localhost:3000";
+export const APP_VERSION = import.meta.env.VITE_APP_VERSION || "0.1.0";
 
 /**
  * [API 설정]
  * API 호출 관련 상수
  */
 export const API_BASE_URL =
-  process.env.PUBLIC_API_URL || "http://localhost:5173/api";
+  import.meta.env.PUBLIC_API_URL || "http://localhost:3000/api";
 export const API_TIMEOUT = 30000; // 30초
 
 /**
